@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://bj088oiu5irhh"]
 
 [ext_resource type="Texture2D" uid="uid://bcdykwkj65j61" path="res://Assets/Knight/ATTACK 1.png" id="1_owtlo"]
+[ext_resource type="Script" uid="uid://vtnj6a2ocjq6" path="res://Objects/KnightController.cs" id="1_tapnq"]
 [ext_resource type="Texture2D" uid="uid://bdjikdlxs0o84" path="res://Assets/Knight/ATTACK 2.png" id="2_1o34j"]
 [ext_resource type="Texture2D" uid="uid://ctmbohgqvafpd" path="res://Assets/Knight/ATTACK 3.png" id="3_7woc6"]
 [ext_resource type="Texture2D" uid="uid://ctn3lxf8tytwn" path="res://Assets/Knight/DEATH.png" id="4_nabqu"]
@@ -10,6 +11,10 @@
 [ext_resource type="Texture2D" uid="uid://pu7v356yjg0r" path="res://Assets/Knight/JUMP.png" id="8_6j7tr"]
 [ext_resource type="Texture2D" uid="uid://o7fi6kpxw7h4" path="res://Assets/Knight/RUN.png" id="9_1hfkx"]
 [ext_resource type="Texture2D" uid="uid://cfhp3sm2sf65v" path="res://Assets/Knight/WALK.png" id="10_dbld7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_a8ku5"]
+radius = 8.0
+height = 34.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nsuie"]
 atlas = ExtResource("1_owtlo")
@@ -300,7 +305,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_o118k")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"ATTACK_1",
 "speed": 8.0
 }, {
@@ -320,7 +325,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_abgp4")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"ATTACK_2",
 "speed": 8.0
 }, {
@@ -343,7 +348,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_0pwgo")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"ATTACK_3",
 "speed": 8.0
 }, {
@@ -384,7 +389,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_gvm6a")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"DEATH",
 "speed": 8.0
 }, {
@@ -407,7 +412,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_dfo06")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"DEFEND",
 "speed": 8.0
 }, {
@@ -427,7 +432,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_1jfgb")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"HURT",
 "speed": 8.0
 }, {
@@ -473,7 +478,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_v58so")
 }],
-"loop": 1,
+"loop": 0,
 "name": &"JUMP",
 "speed": 8.0
 }, {
@@ -536,10 +541,20 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Knight" type="Node2D" unique_id=2130492478]
+[node name="Knight" type="Node2D" unique_id=2130492478 node_paths=PackedStringArray("body", "animatedSprite")]
+script = ExtResource("1_tapnq")
+body = NodePath("CharacterBody2D")
+animatedSprite = NodePath("CharacterBody2D/AnimatedSprite2D")
+gravity = 200.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=984740257]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." unique_id=350620426]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D" unique_id=668594150]
+position = Vector2(0, 3)
+shape = SubResource("CapsuleShape2D_a8ku5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D" unique_id=984740257]
 sprite_frames = SubResource("SpriteFrames_a8ku5")
 animation = &"ATTACK_1"
-frame = 3
-frame_progress = 0.8264468
+frame = 5
+frame_progress = 1.0

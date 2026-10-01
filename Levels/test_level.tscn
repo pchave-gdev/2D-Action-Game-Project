@@ -1,0 +1,49 @@
+[gd_scene format=3 uid="uid://dm0vpvc64ke3f"]
+
+[ext_resource type="PackedScene" uid="uid://bj088oiu5irhh" path="res://Objects/knight.tscn" id="1_ormqy"]
+[ext_resource type="Texture2D" uid="uid://bq35gd0iipofv" path="res://icon.svg" id="2_00vsl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a8ku5"]
+size = Vector2(127, 130)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_00vsl"]
+size = Vector2(523, 12)
+
+[node name="TestLevel" type="Node2D" unique_id=1710575530]
+
+[node name="Knight" parent="." unique_id=2130492478 instance=ExtResource("1_ormqy")]
+position = Vector2(426, 323)
+runVelocity = 100
+gravity = 300.0
+
+[node name="Wall" type="StaticBody2D" parent="." unique_id=570772848]
+position = Vector2(286, 317)
+
+[node name="Sprite" type="Sprite2D" parent="Wall" unique_id=768711023]
+texture = ExtResource("2_00vsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall" unique_id=562501152]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_a8ku5")
+
+[node name="Wall2" type="StaticBody2D" parent="." unique_id=1292795282]
+position = Vector2(619, 317)
+
+[node name="Sprite" type="Sprite2D" parent="Wall2" unique_id=1055073958]
+texture = ExtResource("2_00vsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall2" unique_id=723593822]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_a8ku5")
+
+[node name="Wall3" type="StaticBody2D" parent="." unique_id=451140822]
+position = Vector2(450, 445)
+
+[node name="Sprite" type="Sprite2D" parent="Wall3" unique_id=1961294103]
+position = Vector2(0, -58.5)
+scale = Vector2(4.078125, 0.0859375)
+texture = ExtResource("2_00vsl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Wall3" unique_id=1306381284]
+position = Vector2(-0.5, -59)
+shape = SubResource("RectangleShape2D_00vsl")
