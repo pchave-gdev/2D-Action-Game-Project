@@ -9,6 +9,8 @@ public partial class KnightController : Node2D
 	[Export] int runVelocity = 40;
 	[Export] float gravity = 10;
 
+	State currentState = new PlayerMoveState();
+
 	float currenDirection = 0;
 	float gravityForce = 0;
 
@@ -23,7 +25,7 @@ public partial class KnightController : Node2D
         base._Input(@event);
 
 		currenDirection = Input.GetActionStrength("RightKey", false) + (-Input.GetActionStrength("LeftKey", false));
-
+		
 		//IDLE
 		if (currenDirection == 0)
 		{
@@ -44,6 +46,7 @@ public partial class KnightController : Node2D
 
 		if (Input.IsActionPressed("JumpKey"))
 		{
+			
 			gravityForce = -300;
 		}
 
@@ -53,10 +56,13 @@ public partial class KnightController : Node2D
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
 	public override void _Process(double delta)
 	{
+		GD.Print(currentState.getStateName().ToString());
+		
+		
 		gravityForce += gravity* Convert.ToSingle(delta);
-		if (body.IsOnFloor())
+		if (body.IsOnFloor() && gravityForce > 0)
 		{
-			gravityForce = 0;
+			gravityForce -= 100;
 		}
 		GD.Print(gravityForce);
 		body.Velocity = new(currenDirection * runVelocity, gravityForce);
